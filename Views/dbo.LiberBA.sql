@@ -1,0 +1,46 @@
+SET QUOTED_IDENTIFIER OFF
+GO
+SET ANSI_NULLS ON
+GO
+
+
+
+
+
+
+
+CREATE   VIEW [dbo].[LiberBA] 
+
+AS
+ 
+      SELECT TOP 100 PERCENT 
+             
+             A.KOD,A.PERSHKRIM,A.KOMENT,A.KMON,A.KURS1,A.KURS2,A.VLEFTA,A.VLEFTAMV,
+             A.TIPDOK,A.NRDOK,A.FRAKSDOK,A.DATEDOK,A.TIPFAT,A.NRFAT,A.DTFAT,
+             A.TREGDK,A.TIPKLL,A.ISDOKSHOQ,A.KODMASTER,A.ORG,A.LLOJDOK,A.KODREF,
+             A.ORDERTD,A.NRRENDORDOK,A.TRANNUMBER,A.NRLIBER,A.NRDITAR,A.NRRENDOR,A.TROW,A.TAGNR,
+
+             A.DET1,A.DET2,A.DET3,A.DET4,A.DET5,
+			
+             KODRF              = B.KOD,
+             PERSHKRIMRF        = ISNULL(B.PERSHKRIM,''),
+             LLOGARIRF          = ISNULL(B.LLOGARI,''),
+             DEPRF              = ISNULL(B.DEP,''),
+             LISTERF            = ISNULL(B.LISTE,''),
+             SHENIM1RF          = ISNULL(B.SHENIM1,''),
+             SHENIM2RF          = ISNULL(B.SHENIM2,''),
+             ARKETARRF          = ISNULL(B.ARKETAR,''),
+             KLASIFIKIMRF       = ISNULL(B.KLASIFIKIM,''),
+             
+             NOTACTIVVVRF       = ISNULL(B.NOTACTIV,0)
+             
+        FROM DBA A LEFT JOIN BANKAT B ON CASE WHEN CHARINDEX('.',A.KOD)<>0 THEN LEFT(A.KOD,CHARINDEX('.',A.KOD)-1) ELSE A.KOD END = B.KOD
+
+ -- ORDER BY KMON,DKODRF
+
+
+
+
+
+
+GO

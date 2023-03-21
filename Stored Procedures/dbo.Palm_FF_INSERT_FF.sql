@@ -1,0 +1,176 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+
+
+
+ 
+CREATE  PROCEDURE [dbo].[Palm_FF_INSERT_FF]
+(
+	@PKODUSER	VARCHAR(10),
+	@PDATEDOK	DATETIME,
+	@PKODFKL	VARCHAR(10),
+	@PKMON		VARCHAR(10),
+	@PKMAG		VARCHAR(10),
+	@PKURS2		FLOAT,
+	@PNrFat		VARCHAR(10),
+	@PSeriali	VARCHAR(10),
+	@TipPagesa		nvarchar(10) = '',
+	@Klasifikatori	nvarchar(10) = '',
+	@PNRRENDOR	INT OUTPUT
+)
+AS
+
+DECLARE @VNRDOKMIN AS INTEGER
+DECLARE @VNRDOKMAX AS INTEGER
+DECLARE @VNRDOK AS INTEGER 
+
+SET @VNRDOKMIN=ISNULL((SELECT TOP 1 NRKUFIP FROM DRHUSER WHERE MODUL='F' AND TIPDOK = 'ff' AND KODUS=@PKODUSER),1)
+SET @VNRDOKMAX=ISNULL((SELECT TOP 1 NRKUFIS FROM DRHUSER WHERE MODUL='F' AND TIPDOK = 'ff' AND KODUS=@PKODUSER),999999999)
+
+SET @VNRDOK   =ISNULL((SELECT MAX(NRDOK) AS NRMAX FROM FF
+                WHERE (YEAR(DATEDOK)=YEAR(@PDATEDOK)) AND (NRDOK BETWEEN @VNRDOKMIN AND @VNRDOKMAX))+1,@VNRDOKMIN)
+
+Set @PDATEDOK  = Convert(Datetime, floor(Convert(float, @PDATEDOK)))
+
+INSERT INTO FF 
+      (DATEDOK,
+       KTH,
+       NRDOK,
+       NRFRAKS,
+       KOD,
+       KODFKL,
+       KMON,
+       KLASAKF,
+       VENHUAJ,
+       NIPT, 
+       NRSERIAL,
+       KODFISKAL,
+       RRETHI,
+       SHENIM1,
+       SHENIM2,
+       SHENIM3,
+       SHENIM4, 
+       NRDSHOQ, 
+       DTDSHOQ, 
+       NRRENDDMG, 
+       TIPDMG, 
+       NRMAG, 
+       KMAG, 
+       NRDMAG, 
+       FRDMAG, 
+       DTDMAG, 
+       MODPG, 
+       DTAF, 
+       KURS1, 
+       KURS2,
+       VLPATVSH, 
+       VLTVSH, 
+       VLERZBR, 
+       VLERTOT, 
+       PARAPG, 
+       PERQTVSH, 
+       PERQZBR, 
+       LLOGTVSH, 
+       LLOGZBR,  
+       LLOGARK,  
+       NRDFK, 
+       NRDITAR, 
+       POSTIM, 
+       LETER, 
+       FIRSTDOK, 
+       ISDG, 
+       NRDOKDG, 
+       TAGNR,
+       NRDITARSHL, 
+       NRDFTEXTRA, 
+       NRRENDOROR, 
+       TIPFT, 
+       KLASIFIKIM, 
+       VLTAX, 
+       USI, 
+       USM, 
+       TAG, 
+       TROW) 
+SELECT DATEDOK		=	@PDATEDOK, 
+       KTH			=	0, 
+       NRDOK		=	@VNRDOK, 
+       NRFRAKS		=	0, 
+       KOD			=	@PKODFKL+'.'+@PKMON, 
+       KODFKL		=	@PKODFKL, 
+       KMON			=	@PKMON, 
+       KLASAKF		=	(SELECT GRUP     FROM FURNITOR A WHERE A.KOD=@PKODFKL), 
+       VENHUAJ		=	(SELECT VENDHUAJ FROM FURNITOR A WHERE A.KOD=@PKODFKL), 
+       NIPT			=	Left((SELECT NIPT     FROM FURNITOR A WHERE A.KOD=@PKODFKL), 10), 
+       NRSERIAL		=	@PSeriali, 
+       KODFISKAL	=	ISNULL((SELECT KODFISKAL FROM FURNITOR A WHERE A.KOD=@PKODFKL),''), 
+       RRETHI		=	Left(ISNULL((SELECT V.PERSHKRIM FROM VENDNDODHJE V INNER JOIN FURNITOR K ON V.KOD=K.VENDNDODHJE WHERE K.KOD=@PKODFKL),''), 10), 
+       SHENIM1		=	Left((SELECT PERSHKRIM FROM FURNITOR A WHERE A.KOD=@PKODFKL), 60), 
+       SHENIM2		=	Left((SELECT ADRESA1   FROM FURNITOR A WHERE A.KOD=@PKODFKL), 60), 
+       SHENIM3		=	'', 
+       SHENIM4		=	'', 
+       NRDSHOQ		=	@PNrFat, 
+       DTDSHOQ		=	@PDATEDOK, 
+       NRRENDDMG	=	0, 
+       TIPDMG		=	'H', 
+       NRMAG		=	ISNULL((SELECT NRRENDOR FROM MAGAZINA WHERE MAGAZINA.KOD=@PKMAG),0), 
+       KMAG			=	@PKMAG, 
+       NRDMAG		=	CASE WHEN @PKMAG<>'' THEN ISNULL((SELECT MAX(NRDOK) FROM Fh A WHERE (A.KMAG=@PKMAG) AND YEAR(A.DATEDOK)=YEAR(@PDATEDOK)),0)+1   ELSE 0 END, 
+       FRDMAG		=	0, 
+       DTDMAG		=	CASE WHEN @PKMAG<>'' THEN @PDATEDOK ELSE 0 END, 
+       MODPG		=	@TipPagesa, 
+       DTAF			=	ISNULL((SELECT AFAT FROM FURNITOR A WHERE A.KOD=@PKODFKL),0), 
+       KURS1		=	1, 
+       KURS2		=	@PKURS2,
+       VLPATVSH		=	0, 
+       VLTVSH		=	0, 
+       VLERZBR		=	0, 
+       VLERTOT		=	0, 
+       PARAPG		=	0, 
+       PERQTVSH		=	ISNULL((SELECT Top 1 PERQTATB FROM CONFIGLM),0), 
+       PERQZBR		=	0, 
+       LLOGTVSH		=	ISNULL((SELECT Top 1 LLOGTATB FROM CONFIGLM),''), 
+       LLOGZBR		=	ISNULL((SELECT Top 1 LLOGZBR FROM CONFIGLM),0),  
+       LLOGARK		=	ISNULL((SELECT Top 1 LLOGARK FROM CONFIGLM),0),  
+       NRDFK		=	0, 
+       NRDITAR		=	0, 
+       POSTIM		=	0, 
+       LETER		=	0, 
+       FIRSTDOK		=	'', 
+       ISDG			=	0, 
+       NRDOKDG		=	0, 
+       TAGNR		=	0,
+       NRDITARSHL	=	0, 
+       NRDFTEXTRA	=	0, 
+       NRRENDOROR	=	0, 
+       TIPFT		=	'02', 
+       KLASIFIKIM	=	Left(@Klasifikatori, 4), 
+       VLTAX		=	0, 
+       USI			=	'A', 
+       USM			=	'A', 
+       TAG			=	0, 
+       TROW			=	0 
+
+SET @PNRRENDOR=@@IDENTITY
+
+UPDATE FF SET FIRSTDOK='F'+CAST(CAST(@PNRRENDOR AS BIGINT) AS VARCHAR) WHERE NRRENDOR=@PNRRENDOR
+
+RETURN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO

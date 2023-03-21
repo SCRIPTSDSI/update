@@ -1,0 +1,75 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+
+
+
+CREATE   FUNCTION [dbo].[Isd_GetTcrGjendje]
+( 
+  @pTcrCode    Varchar(30),
+  @pDate       Varchar(20)
+ )
+ 
+RETURNS       Float
+
+AS
+
+BEGIN
+
+	 DECLARE @Date       DateTime,
+	         @TcrCode    Varchar(20),
+	         @Result     Float;
+
+
+
+         SET @Date     = dbo.DateValue(@pDate);
+		 SET @TcrCode  = @pTcrCode;
+
+
+
+      SELECT @Result = SUM(A.VLERA)
+        FROM
+	  (
+      SELECT TCRCODE,   VLERA=CASE WHEN CHARINDEX(TIPI,'INITIAL,DEPOSIT')>0 THEN 1 ELSE -1 END*VLERA 
+        FROM LogArka 
+       WHERE TCRCODE=@TcrCode AND ERROR='0' AND DATEDOK=@Date
+
+   UNION ALL
+
+      SELECT B.KODTCR,  VLERA=A.VLERTOT*KURS2
+        FROM FJ A INNER JOIN FisTCR B ON  A.FISTCR=B.Kod
+		          INNER JOIN FisMenPagese C ON A.FISMENPAGESE=C.Kod
+       WHERE B.KODTCR=@TcrCode AND C.KLASEPAGESE='ARKE' AND A.DATEDOK=@Date
+
+   UNION ALL
+
+      SELECT B.KODTCR,  VLERA=A.VLERTOT*KURS2
+        FROM FF A INNER JOIN FisTCR B ON  A.FISTCR=B.Kod
+		          INNER JOIN FisMenPagese C ON A.FISMENPAGESE=C.Kod
+       WHERE B.KODTCR=@TcrCode AND C.KLASEPAGESE='ARKE' AND A.DATEDOK=@Date
+
+   UNION ALL
+
+      SELECT B.KODTCR,  VLERA=A.VLERTOT*KURS2
+        FROM SM A INNER JOIN FisTCR B ON  A.FISTCR=B.Kod
+		          INNER JOIN FisMenPagese C ON A.FISMENPAGESE=C.Kod
+       WHERE B.KODTCR=@TcrCode AND C.KLASEPAGESE='ARKE' AND A.DATEDOK=@Date
+
+   UNION ALL
+
+      SELECT B.KODTCR,  VLERA=A.VLERTOT*KURS2
+        FROM SMBAK A INNER JOIN FisTCR B ON  A.FISTCR=B.Kod
+		             INNER JOIN FisMenPagese C ON A.FISMENPAGESE=C.Kod
+       WHERE B.KODTCR=@TcrCode AND C.KLASEPAGESE='ARKE' AND A.DATEDOK=@Date
+
+	   ) A
+
+	  GROUP BY A.TCRCODE;
+	  RETURN @Result;
+
+END
+
+
+
+GO

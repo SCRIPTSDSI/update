@@ -1,0 +1,26 @@
+CREATE TABLE [dbo].[TIPDOK]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[TIPDOK] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KOD] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERSHKRIM] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[NRORD] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KODNUM] [int] NULL,
+[KODTD] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL,
+[VISIBLE] [bit] NULL,
+[SHENIM1] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KLASIFIKIM1] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[GRUP] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[OBJEKT] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[MODUL] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[FISKALIZIM] [bit] NULL,
+[USI] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[USM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[DATECREATE] [datetime] NULL CONSTRAINT [DF_TIPDOK_DATECREATE] DEFAULT (getdate()),
+[DATEEDIT] [datetime] NULL CONSTRAINT [DF_TIPDOK_DATEEDIT] DEFAULT (getdate())
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [KODNUM] ON [dbo].[TIPDOK] ([KODNUM]) ON [PRIMARY]
+GO

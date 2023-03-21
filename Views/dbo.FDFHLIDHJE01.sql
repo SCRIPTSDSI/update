@@ -1,0 +1,79 @@
+SET QUOTED_IDENTIFIER OFF
+GO
+SET ANSI_NULLS ON
+GO
+
+
+
+
+
+
+
+CREATE                  VIEW [dbo].[FDFHLIDHJE01] AS 
+
+  SELECT TOP 100 PERCENT 
+         DOKUMENT     = 'FD',
+         NRRENDOR, 
+         KMAG, 
+         NRDOK, 
+         NRFRAKS      = ISNULL(NRFRAKS,0),
+         DATEDOK,
+         KMAGRF       = ISNULL(KMAGRF,''),
+         SHENIM1,
+         SHENIM2,
+         KMAGLNK      = ISNULL(KMAGLNK,''),
+         NRDOKLNK     = ISNULL(NRDOKLNK,0),
+         NRFRAKSLNK   = ISNULL(NRFRAKSLNK,0),
+         DATEDOKLNK   = ISNULL(DATEDOKLNK,DATEDOK),
+         KMAGLNK1     = ISNULL(KMAGLNK,''),
+         NRDOKLNK1    = ISNULL(NRDOKLNK,0),
+         NRFRAKSLNK1  = ISNULL(NRFRAKSLNK,0),
+         DATEDOKLNK1  = ISNULL(DATEDOKLNK,DATEDOK),
+         KMAGLNK2     = KMAG,
+         NRDOKLNK2    = NRDOK,
+         NRFRAKSLNK2  = ISNULL(NRFRAKS,0),
+         DATEDOKLNK2  = DATEDOK
+     FROM FD 
+    WHERE ISNULL(DOK_JB,0)=0 AND (ISNULL(DST,'') IN ('LB','KM','DM','FU'))
+
+UNION ALL
+
+   SELECT TOP 100 PERCENT 
+          DOKUMENT    = 'FH',
+          NRRENDOR,
+          KMAG,
+          NRDOK,
+          NRFRAKS     = ISNULL(NRFRAKS,0),
+          DATEDOK,
+          KMAGRF      = ISNULL(KMAGRF,''),
+          SHENIM1,
+          SHENIM2,
+          KMAGLNK     = ISNULL(KMAGLNK,''),
+          NRDOKLNK    = ISNULL(NRDOKLNK,0),
+          NRFRAKSLNK  = ISNULL(NRFRAKSLNK,0),
+          DATEDOKLNK  = ISNULL(DATEDOKLNK,DATEDOK),
+          KMAGLNK1    = KMAG,
+          NRDOKLNK1   = NRDOK,
+          NRFRAKSLNK1 = ISNULL(NRFRAKS,0),
+          DATEDOKLNK1 = DATEDOK,
+          KMAGLNK2    = ISNULL(KMAGLNK,''),
+          NRDOKLNK2   = ISNULL(NRDOKLNK,0),
+          NRFRAKSLNK2 = ISNULL(NRFRAKSLNK,0),
+          DATEDOKLNK2 = ISNULL(DATEDOKLNK,DATEDOK)
+     FROM FH 
+    WHERE ISNULL(DOK_JB,0)=0 AND (ISNULL(DST,'') IN ('LB','KM','DM','FU'))
+ ORDER BY KMAGLNK, NRDOKLNK, DATEDOKLNK
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO

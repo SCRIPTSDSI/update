@@ -1,0 +1,33 @@
+CREATE TABLE [dbo].[ArtikujCmBl]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[NRD] [int] NULL,
+[KOD] [varchar] (60) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CMBL1] [float] NULL,
+[CMBL2] [float] NULL,
+[CMBL3] [float] NULL,
+[CMBL4] [float] NULL,
+[CMBL5] [float] NULL,
+[CMBL6] [float] NULL,
+[CMBL7] [float] NULL,
+[CMBL8] [float] NULL,
+[CMBL9] [float] NULL,
+[CMBL10] [float] NULL,
+[CMBL11] [float] NULL,
+[CMBL12] [float] NULL,
+[CMBL13] [float] NULL,
+[CMBL14] [float] NULL,
+[CMBL15] [float] NULL,
+[CMBL16] [float] NULL,
+[CMBL17] [float] NULL,
+[CMBL18] [float] NULL,
+[CMBL19] [float] NULL,
+[CMBL20] [float] NULL,
+[USI] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[USM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[DATECREATE] [datetime] NULL CONSTRAINT [DF_ArtikujCmBl_DATECRATE] DEFAULT (getdate()),
+[DATEEDIT] [datetime] NULL CONSTRAINT [DF_ArtikujCmBl_DATEEDIT] DEFAULT (getdate()),
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO

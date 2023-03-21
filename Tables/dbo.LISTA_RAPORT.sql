@@ -1,0 +1,32 @@
+CREATE TABLE [dbo].[LISTA_RAPORT]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[NRD] [int] NULL,
+[MODUL] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[NRR] [int] NULL,
+[LABELDHENA] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[FUSHA] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERSHKRIM] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PBAND] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PTOP] [int] NULL,
+[PLEFT] [int] NULL,
+[PWIDTH] [int] NULL,
+[PHIGHT] [int] NULL,
+[FCOLOR] [int] NULL,
+[FHIGHT] [int] NULL,
+[FNAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[FSIZE] [int] NULL,
+[FSTYLE] [varchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TIP] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[DEC] [int] NULL,
+[TOTAL] [bit] NULL,
+[VISIBLE] [bit] NULL,
+[FORMULA] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[MBARTJE] [bit] NULL,
+[TIPK] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TIPV] [int] NULL,
+[TEKST] [nvarchar] (250) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO

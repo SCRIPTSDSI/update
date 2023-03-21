@@ -1,0 +1,21 @@
+CREATE TABLE [dbo].[ArtikujOrdScr]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1) NOT FOR REPLICATION,
+[NRD] [int] NULL,
+[KOD] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERSHKRIM] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[NJESI] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[SASI] [float] NULL,
+[KODAF] [varchar] (60) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TIPKLL] [varchar] (5) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KMAG] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ORDERSCR] [int] NULL,
+[STATROW] [varchar] (5) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TAGNR] [int] NULL,
+[TROW] [bit] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[ArtikujOrdScr] ADD CONSTRAINT [PK__ArtikujO__2E8B20C716FE0F29] PRIMARY KEY CLUSTERED  ([NRRENDOR]) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_ArtikujOrdScr] ON [dbo].[ArtikujOrdScr] ([NRD]) ON [PRIMARY]
+GO

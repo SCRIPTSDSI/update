@@ -1,0 +1,27 @@
+CREATE TABLE [dbo].[MONEDHA]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[KOD] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERSHKRIM] [varchar] (40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[SIMBOL] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[MONVEND] [bit] NULL,
+[KURS1] [float] NULL,
+[KURS2] [float] NULL,
+[TAG] [bit] NULL,
+[KOD1] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KURS1R] [float] NULL,
+[KURS2R] [float] NULL,
+[KURS1KR] [float] NULL,
+[KURS2KR] [float] NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL,
+[ORD] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[NOTACTIV] [bit] NULL,
+[USI] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[USM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[DATECREATE] [datetime] NULL CONSTRAINT [DF_MON_DATECREATE] DEFAULT (getdate()),
+[DATEEDIT] [datetime] NULL CONSTRAINT [DF_MON_DATEEDIT] DEFAULT (getdate())
+) ON [PRIMARY]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [KOD_MONEDHA] ON [dbo].[MONEDHA] ([KOD]) ON [PRIMARY]
+GO

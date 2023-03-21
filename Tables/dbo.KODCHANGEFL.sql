@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[KODCHANGEFL]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[KOD] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERSHKRIM] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO

@@ -1,0 +1,32 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE FUNCTION [RS].[GET_SUB_ROWS] (@ParentID INT)
+RETURNS @T_SUB_ROWS TABLE(
+	ID INT,
+	Pershkrim VARCHAR(200),
+	RefID INT
+)
+AS
+BEGIN
+	WITH CTE_RapRows(ID,Pershkrim,RefID)
+	AS
+	(
+		SELECT ID,Pershkrim,RefID
+		FROM RS.Rows
+		WHERE RefID=@ParentID 
+			UNION ALL
+		SELECT R.ID,R.Pershkrim,R.RefID
+		FROM RS.Rows R
+		INNER JOIN CTE_RapRows C ON C.ID=R.RefID
+		WHERE R.IsTotal<>1
+	)
+
+	INSERT INTO @T_SUB_ROWS(ID,Pershkrim,RefID)
+	SELECT ID,Pershkrim,RefID
+	FROM CTE_RapRows
+
+	RETURN
+END
+GO
