@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[AQKls4]
 [USM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [TROW] [bit] NULL,
 [TAG] [bit] NULL,
-[TAGNR] [int] NULL
+[TAGNR] [int] NULL,
+[terst] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 ) ON [PRIMARY]
 GO
