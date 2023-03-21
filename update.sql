@@ -1,4 +1,4 @@
-//TEST
+
 IF OBJECT_ID('dbo.FJStornimScr', 'U') IS NULL 
 SET NOEXEC ON
 GO
