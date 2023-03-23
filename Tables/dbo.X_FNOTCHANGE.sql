@@ -1,8 +1,0 @@
-CREATE TABLE [dbo].[X_FNOTCHANGE]
-(
-[NRRENDOR] [int] NOT NULL,
-[FNAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[TAGNR] [int] NULL,
-[TROW] [bit] NULL
-) ON [PRIMARY]
-GO

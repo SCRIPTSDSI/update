@@ -1,8 +1,0 @@
-CREATE TABLE [dbo].[BUXHET_TIP_SHFAQJE]
-(
-[ID] [int] NOT NULL IDENTITY(1, 1),
-[PERSHKRIM] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[KOLONA] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[TABELA] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
-) ON [PRIMARY]
-GO

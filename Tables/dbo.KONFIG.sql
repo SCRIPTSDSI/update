@@ -1,7 +1,0 @@
-CREATE TABLE [dbo].[KONFIG]
-(
-[NRRENDOR] [int] NOT NULL,
-[FUSHA] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[VLERA] [nvarchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
-) ON [PRIMARY]
-GO

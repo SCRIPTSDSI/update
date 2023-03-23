@@ -1,9 +1,0 @@
-CREATE TABLE [dbo].[vleravoucher]
-(
-[NRRENDOR] [int] NOT NULL IDENTITY(1, 1) NOT FOR REPLICATION,
-[VLEFTE] [float] NULL,
-[MONEDHE] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[vleravoucher] ADD CONSTRAINT [PK_vleravoucher] PRIMARY KEY CLUSTERED  ([NRRENDOR]) ON [PRIMARY]
-GO
