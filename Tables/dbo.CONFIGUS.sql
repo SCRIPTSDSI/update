@@ -1,0 +1,30 @@
+CREATE TABLE [dbo].[CONFIGUS]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[KODUS] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ACOLOR] [int] NULL,
+[BCOLOR] [int] NULL,
+[LCOLOR] [int] NULL,
+[SCOLOR] [int] NULL,
+[FCOLOR] [int] NULL,
+[KCOLOR] [int] NULL,
+[RCOLOR] [int] NULL,
+[ACOLORACT] [bit] NULL,
+[BCOLORACT] [bit] NULL,
+[LCOLORACT] [bit] NULL,
+[SCOLORACT] [bit] NULL,
+[FCOLORACT] [bit] NULL,
+[KCOLORACT] [bit] NULL,
+[RCOLORACT] [bit] NULL,
+[ACTIVCOLROWS] [bit] NULL,
+[XCOLOR] [int] NULL,
+[XCOLORACT] [bit] NULL,
+[DATECREATE] [datetime] NULL CONSTRAINT [DF_CFGUS_DATECREATE] DEFAULT (getdate()),
+[DATEEDIT] [datetime] NULL CONSTRAINT [DF_CFGUS_DATEEDIT] DEFAULT (getdate()),
+[USI] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[USM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TAG] [bit] NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO

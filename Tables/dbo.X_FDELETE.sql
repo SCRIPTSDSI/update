@@ -1,0 +1,8 @@
+CREATE TABLE [dbo].[X_FDELETE]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[FNAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO

@@ -1,0 +1,14 @@
+CREATE TABLE [dbo].[FJKOMENT]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1) NOT FOR REPLICATION,
+[ACTIV] [bit] NULL,
+[PERSHKRIM] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KOMENT] [nvarchar] (250) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[DTFILLIM] [datetime] NULL,
+[USI] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[USM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TAG] [bit] NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO

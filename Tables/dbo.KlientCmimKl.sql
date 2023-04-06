@@ -1,0 +1,31 @@
+CREATE TABLE [dbo].[KlientCmimKl]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[NRD] [int] NOT NULL,
+[KOD] [varchar] (60) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERSHKRIM] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[NIPT] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PERFAQESUES] [varchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ADRESA1] [varchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ADRESA2] [varchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KLASIFIKIM1] [varchar] (25) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KLASIFIKIM2] [varchar] (25) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KLASIFIKIM3] [varchar] (25) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[GRUP] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KATEGORI] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[VENDNDODHJE] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[RAJON] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[AGJENTSHITJE] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[STATROW] [varchar] (5) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[KlientCmimKl] ADD CONSTRAINT [PK_KlientCmimKl] PRIMARY KEY CLUSTERED  ([NRRENDOR]) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [I_Kod] ON [dbo].[KlientCmimKl] ([KOD]) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_KlientCmimKl_NRD] ON [dbo].[KlientCmimKl] ([NRD]) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[KlientCmimKl] ADD CONSTRAINT [FJ_KlientCmimKl_KlientCmim1] FOREIGN KEY ([NRD]) REFERENCES [dbo].[KlientCmim] ([NRRENDOR]) ON DELETE CASCADE ON UPDATE CASCADE
+GO

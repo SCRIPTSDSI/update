@@ -1,0 +1,13 @@
+CREATE TABLE [dbo].[ARTIKUJ_PATH]
+(
+[NRRENDOR] [int] NOT NULL IDENTITY(1, 1),
+[PERSHKRIM] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PATHDB] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PATHEXE] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[KOD] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[NRORDER] [varchar] (5) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[AKTIV] [bit] NULL,
+[TROW] [bit] NULL,
+[TAGNR] [int] NULL
+) ON [PRIMARY]
+GO
